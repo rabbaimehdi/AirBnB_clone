@@ -6,12 +6,20 @@ import datetime
 
 class BaseModel:
     
-    def __init__(self, *args, **kwargs):
-        pass
-
     id = str(uuid.uuid4())
     created_at = datetime.datetime.now()
     updated_at = datetime.datetime.now()
+
+    def __init__(self, *args, **kwargs):
+        
+        time_format = "%Y-%m-%dT%H:%M:%S.%f"
+
+        if len(kwargs) != 0:
+            for key, value in kwargs.items():
+                if key =='created_at' or key =="updated_at":
+                  self.__dict__[key] = datetime.datetime.strptime(value,time_format)
+                else:
+                    self.__dict__[key] = value
 
     def __str__(self):
         return f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
