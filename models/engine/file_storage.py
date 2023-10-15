@@ -2,6 +2,7 @@
 import json
 from models.base_model import BaseModel
 
+
 class FileStorage:
     """Abstracted storage engine.
 
@@ -18,7 +19,7 @@ class FileStorage:
     def all(self):
         """Return the dictionary __objects."""
         return FileStorage.__objects
-    
+
     def new(self, obj):
         """Set in __objects obj with key <obj_class_name>.id"""
         class_name = obj.__class__.__name__
@@ -44,5 +45,5 @@ class FileStorage:
                     class_name = item["__class__"]
                     del item["__class__"]
                     self.new(eval(class_name)(**item))
-        except:
+        except FileNotFoundError:
             pass
