@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import uuid
 import datetime
+from models import storage
 
 #Write a class BaseModel that defines all common attributes/methods for other classes:
 
@@ -19,12 +20,15 @@ class BaseModel:
                   self.__dict__[key] = datetime.datetime.strptime(value,time_format)
                 else:
                     self.__dict__[key] = value
+        else:
+            storage.new(self)
 
     def __str__(self):
         return f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         self.updated_at = datetime.datetime.now()
+        storage.save()
     
     def to_dict(self):
         dictionnary = self.__dict__.copy()
