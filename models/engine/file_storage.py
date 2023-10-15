@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import json
+from models.base_model import BaseModel
 
 class FileStorage:
     """Abstracted storage engine.
@@ -37,11 +38,11 @@ class FileStorage:
     def reload(self):
         """Deserialize the JSON file __file_path to __objects, no exception"""
         try:
-            with open(FileStorage.__file_path, 'r') as file:
+            with open(FileStorage.__file_path) as file:
                 dict = json.load(file)
-            for item in dict.values():
-                class_name = item["__class__"]
-                del item["__class__"]
-                self.new(eval(class_name)(**item))
+                for item in dict.values():
+                    class_name = item["__class__"]
+                    del item["__class__"]
+                    self.new(eval(class_name)(**item))
         except:
             pass
