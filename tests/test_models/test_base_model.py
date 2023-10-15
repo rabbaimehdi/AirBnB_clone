@@ -83,6 +83,7 @@ class TestBaseModel_instantiation(unittest.TestCase):
         self.assertEqual(bm.created_at, dt)
         self.assertEqual(bm.updated_at, dt)
 
+
 class TestBaseModel_save(unittest.TestCase):
     """Testing save method of the BaseModel class."""
 
@@ -116,6 +117,7 @@ class TestBaseModel_save(unittest.TestCase):
         with self.assertRaises(TypeError):
             bm.save(None)
 
+
 class TestBaseModel_to_dict(unittest.TestCase):
     """Testing to_dict method of the BaseModel class."""
 
@@ -136,6 +138,7 @@ class TestBaseModel_to_dict(unittest.TestCase):
         bm.my_number = 98
         self.assertIn("name", bm.to_dict())
         self.assertIn("my_number", bm.to_dict())
+
 
 if __name__ == "__main__":
     unittest.main()
