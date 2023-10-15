@@ -83,5 +83,6 @@ class TestBaseModel_instantiation(unittest.TestCase):
         self.assertEqual(bm.created_at, dt)
         self.assertEqual(bm.updated_at, dt)
 
+
 if __name__ == "__main__":
     unittest.main()
