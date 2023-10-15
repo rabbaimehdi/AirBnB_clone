@@ -83,6 +83,59 @@ class TestBaseModel_instantiation(unittest.TestCase):
         self.assertEqual(bm.created_at, dt)
         self.assertEqual(bm.updated_at, dt)
 
+class TestBaseModel_save(unittest.TestCase):
+    """Testing save method of the BaseModel class."""
+
+    @classmethod
+    def setUp(self):
+        try:
+            os.rename("file.json", "tmp")
+        except IOError:
+            pass
+
+    @classmethod
+    def tearDown(self):
+        try:
+            os.remove("file.json")
+        except IOError:
+            pass
+        try:
+            os.rename("tmp", "file.json")
+        except IOError:
+            pass
+
+    def test_one_save(self):
+        bm = BaseModel()
+        sleep(0.05)
+        first_updated_at = bm.updated_at
+        bm.save()
+        self.assertLess(first_updated_at, bm.updated_at)
+
+    def test_save_with_arg(self):
+        bm = BaseModel()
+        with self.assertRaises(TypeError):
+            bm.save(None)
+
+class TestBaseModel_to_dict(unittest.TestCase):
+    """Testing to_dict method of the BaseModel class."""
+
+    def test_to_dict_type(self):
+        bm = BaseModel()
+        self.assertTrue(dict, type(bm.to_dict()))
+
+    def test_to_dict_contains_correct_keys(self):
+        bm = BaseModel()
+        self.assertIn("id", bm.to_dict())
+        self.assertIn("created_at", bm.to_dict())
+        self.assertIn("updated_at", bm.to_dict())
+        self.assertIn("__class__", bm.to_dict())
+
+    def test_to_dict_contains_added_attributes(self):
+        bm = BaseModel()
+        bm.name = "ALX"
+        bm.my_number = 98
+        self.assertIn("name", bm.to_dict())
+        self.assertIn("my_number", bm.to_dict())
 
 if __name__ == "__main__":
     unittest.main()
