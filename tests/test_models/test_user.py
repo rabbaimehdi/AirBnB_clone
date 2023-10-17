@@ -38,5 +38,6 @@ class TestUser_instantiation(unittest.TestCase):
         us2 = User()
         self.assertNotEqual(us1.id, us2.id)
 
+
 if __name__ == "__main__":
     unittest.main()
