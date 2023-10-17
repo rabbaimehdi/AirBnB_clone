@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-from models.base_model import BaseModel
+from models import base_model
 
 # Write a class User that inherits from BaseModel
-class User(BaseModel):
+class User(base_model.BaseModel):
     """User.
 
     Attributes:
@@ -11,7 +11,7 @@ class User(BaseModel):
         first_name (str): The first name of the user.
         last_name (str): The last name of the user.
     """
-    
+
     email = ""
     password = ""
     first_name = ""
