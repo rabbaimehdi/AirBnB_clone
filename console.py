@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Defines the AiRBNB console."""
 import cmd
+import re
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -10,8 +11,16 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
+# def parse(arg):
+#     return [i.strip(",") for i in str.split(arg)]
 def parse(arg):
-    return [i.strip(",") for i in str.split(arg)]
+    braces = re.search(r"\((.*?)\)", arg)
+    if braces is None:
+        return [i.strip(",") for i in str.split(arg)]
+    else:
+        no_braces = arg[:braces.span()[0]]
+        splited_word = no_braces.split(".")
+        return splited_word[::-1]
 
 
 class HBNBCommand(cmd.Cmd):
