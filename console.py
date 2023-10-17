@@ -2,6 +2,7 @@
 """Defines the AiRBNB console."""
 import cmd
 from models import storage
+from models.base_model import BaseModel
 
 def parse(arg):
     return [i.strip(",") for i in str.split(arg)]
@@ -15,6 +16,9 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb) "
+    __classes = {
+        "BaseModel"
+    }
 
     def emptyline(self):
         """Do nothing when an empty line."""
