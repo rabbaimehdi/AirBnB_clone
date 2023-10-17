@@ -36,6 +36,12 @@ class HBNBCommand(cmd.Cmd):
         """Do nothing when an empty line."""
         pass
 
+    def default(self, arg):
+        """Default behavior for cmd when no input is provided"""
+        argdict = {
+            "all": self.do_all
+        }
+
     def do_quit(self, arg):
         """Quit command to exit the program."""
         return True
