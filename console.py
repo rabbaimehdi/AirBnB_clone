@@ -11,6 +11,7 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
+
 def parse(arg):
     return [i.strip(",") for i in str.split(arg)]
 # def parse(arg):
@@ -60,7 +61,6 @@ class HBNBCommand(cmd.Cmd):
                 if command in argdict.keys():
                     model_call = "{} ".format(arguments[0])
                     return argdict[command](model_call)
-    
 
     def do_quit(self, arg):
         """Quit command to exit the program."""
@@ -70,7 +70,7 @@ class HBNBCommand(cmd.Cmd):
         """EOF signal to exit the program."""
         print("")
         return True
-    
+
     def do_create(self, arg):
         """Creates a new class instance then prints its id."""
         arguments = parse(arg)
@@ -83,7 +83,8 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_show(self, arg):
-        """Displays the string representation of a class instance provided its id."""
+        """The string representation 
+        of a class instance provided its id."""
         arguments = parse(arg)
         dictionary = storage.all()
         if len(arguments) == 0:
@@ -107,7 +108,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(arguments) == 1:
             print("** instance id missing **")
-        elif "{}.{}".format(arguments[0], arguments[1]) not in dictionary.keys():
+        elif "{}.{}".format(arguments[0], \
+        arguments[1]) not in dictionary.keys():
             print("** no instance found **")
         else:
             del dictionary["{}.{}".format(arguments[0], arguments[1])]
@@ -122,7 +124,8 @@ class HBNBCommand(cmd.Cmd):
         else:
             objectsectslist = []
             for objects in storage.all().values():
-                if len(arguments) > 0 and arguments[0] == objects.__class__.__name__:
+                if len(arguments) > 0 and\
+                arguments[0] == objects.__class__.__name__:
                     objectsectslist.append(objects.__str__())
                 elif len(arguments) == 0:
                     objectsectslist.append(objects.__str__())
@@ -164,7 +167,8 @@ class HBNBCommand(cmd.Cmd):
             else:
                 objects.__dict__[arguments[2]] = arguments[3]
         elif type(eval(arguments[2])) == dict:
-            objects = dictionary["{}.{}".format(arguments[0], arguments[1])]
+            objects = dictionary["{}.{}".format\
+            (arguments[0], arguments[1])]
             for k, v in eval(arguments[2]).items():
                 if (k in objects.__class__.__dict__.keys() and
                         type(objects.__class__.__dict__[k]) in {str, int, float}):
@@ -182,6 +186,7 @@ class HBNBCommand(cmd.Cmd):
             if arguments[0] == obj.__class__.__name__:
                 counter += 1
         print(counter)
+        
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
