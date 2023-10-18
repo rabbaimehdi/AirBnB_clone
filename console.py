@@ -50,6 +50,16 @@ class HBNBCommand(cmd.Cmd):
         argdict = {
             "all": self.do_all
         }
+        re_match = re.search(r"\.", arg)
+        if re_match is not None:
+            arguments = [arg[:re_match.span()[0]], arg[re_match.span()[1]:]]
+            re_match = re.search(r"\((.*?)\)", arguments[1])
+            if re_match is not None:
+                command = arguments[1][:re_match.span()[0]]
+                if command in argdict.keys():
+                    model_call = "{} ".format(arguments[0])
+                    return argdict[command](model_call)
+    
 
     def do_quit(self, arg):
         """Quit command to exit the program."""
