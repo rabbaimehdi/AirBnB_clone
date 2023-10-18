@@ -49,8 +49,7 @@ class HBNBCommand(cmd.Cmd):
         """Default behavior for cmd when no input is provided"""
         argdict = {
             "all": self.do_all,
-            "count": self.do_count,
-            "show": self.do_show
+            "count": self.do_count
         }
         re_match = re.search(r"\.", arg)
         if re_match is not None:
