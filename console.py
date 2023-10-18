@@ -125,7 +125,7 @@ class HBNBCommand(cmd.Cmd):
             objectsectslist = []
             for objects in storage.all().values():
                 if len(arguments) > 0 and\
-                    arguments[0] == objects.__class__.__name__:
+                      arguments[0] == objects.__class__.__name__:
                     objectsectslist.append(objects.__str__())
                 elif len(arguments) == 0:
                     objectsectslist.append(objects.__str__())
@@ -170,9 +170,9 @@ class HBNBCommand(cmd.Cmd):
             objects = dictionary["{}.{}".format
                                  (arguments[0], arguments[1])]
             for k, v in eval(arguments[2]).items():
-                if (k in objects.__class__.__dict__.keys() and
-                        type(objects.__class__.__dict__[k])\
-                             in {str, int, float}):
+                if (k in objects.__class__.__dict__.keys() and 
+                    type(objects.__class__.__dict__[k]) 
+                        in {str, int, float}):
                     valuetype = type(objects.__class__.__dict__[k])
                     objects.__dict__[k] = valuetype(v)
                 else:
