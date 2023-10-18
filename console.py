@@ -170,8 +170,8 @@ class HBNBCommand(cmd.Cmd):
             objects = dictionary["{}.{}".format
                                  (arguments[0], arguments[1])]
             for k, v in eval(arguments[2]).items():
-                if (k in objects.__class__.__dict__.keys() and 
-                    type(objects.__class__.__dict__[k]) 
+                if (k in objects.__class__.__dict__.keys() and
+                    type(objects.__class__.__dict__[k])
                         in {str, int, float}):
                     valuetype = type(objects.__class__.__dict__[k])
                     objects.__dict__[k] = valuetype(v)
