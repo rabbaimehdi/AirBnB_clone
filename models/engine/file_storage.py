@@ -8,6 +8,7 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
+
 class FileStorage:
     """Abstracted storage engine.
 
@@ -47,6 +48,7 @@ class FileStorage:
             with open(FileStorage.__file_path) as file:
                 dict = json.load(file)
                 for item in dict.values():
+
                     class_name = item["__class__"]
                     del item["__class__"]
                     self.new(eval(class_name)(**item))
